@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAWEC — National Water & Electricity Company, The Gambia</title>
+<style>
+/* ── Google Fonts fallback stack (works offline) ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #003B6F;   /* NAWEC deep blue */
+  --blue:    #0057A8;   /* primary blue    */
+  --blue2:   #1A6FC4;   /* lighter blue    */
+  --green:   #00875A;   /* water/success   */
+  --amber:   #E07B00;   /* electricity/CTA */
+  --red:     #C0392B;   /* emergency/danger*/
+  --white:   #FFFFFF;
+  --off:     #F5F7FA;
+  --border:  #D6E0EF;
+  --text:    #1A2A3A;
+  --muted:   #5A6A7A;
+  --card:    #FFFFFF;
+  --shadow:  0 2px 12px rgba(0,60,120,.10);
+  --shadow2: 0 6px 28px rgba(0,60,120,.16);
+  --r:       10px;
+  --r2:      6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--off);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ─── TOPBAR ─────────────────────────────────────────────────── */
+.topbar {
+  background: var(--navy);
+  color: rgba(255,255,255,.85);
+  font-size: 12px;
+  padding: 6px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.topbar a { color: rgba(255,255,255,.85); text-decoration: none; }
+.topbar a:hover { color: #fff; }
+.topbar-right { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.emergency-badge {
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: .3px;
+}
+
+/* ─── NAVBAR ─────────────────────────────────────────────────── */
+nav {
+  background: var(--blue);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 0;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: 32px;
+}
+.nav-logo-icon {
+  width: 44px; height: 44px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.nav-logo-text { line-height: 1.2; }
+.nav-logo-text .brand { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 1px; }
+.nav-logo-text .sub { font-size: 10px; color: rgba(255,255,255,.75); letter-spacing: .5px; }
+.nav-links { display: flex; gap: 2px; flex: 1; }
+.nav-link {
+  color: rgba(255,255,255,.9);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 20px 14px;
+  border-bottom: 3px solid transparent;
+  transition: .2s;
+  cursor: pointer;
+  background: none; border-top: none; border-left: none; border-right: none;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: #fff;
+  border-bottom-color: var(--amber);
+  background: rgba(255,255,255,.08);
+}
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.btn-portal {
+  background: var(--amber);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--r2);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: .2s;
+}
+.btn-portal:hover { background: #c96e00; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+.hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--navy);
+  padding: 8px 0 16px;
+}
+.mobile-menu .nav-link {
+  padding: 12px 24px;
+  border-bottom: none;
+  border-left: 3px solid transparent;
+}
+.mobile-menu .nav-link:hover { border-left-color: var(--amber); }
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, #005eb8 100%);
+  color: #fff;
+  padding: 72px 40px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 60px solid rgba(255,255,255,.05);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  left: -60px; bottom: -120px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 50px solid rgba(255,255,255,.04);
+}
+.hero-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.hero h1 {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  letter-spacing: -.5px;
+}
+.hero h1 span { color: var(--amber); }
+.hero-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,.8);
+  margin-bottom: 32px;
+  line-height: 1.65;
+  max-width: 460px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--amber);
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: var(--r2);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: .2s;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-primary:hover { background: #c96e00; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  padding: 12px 26px;
+  border-radius: var(--r2);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,.45);
+  font-family: inherit;
+  transition: .2s;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+
+/* Hero stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.hero-stat {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--r);
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+.hero-stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums;
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* ─── SERVICES QUICK ─────────────────────────────────────────── */
+.quick-services {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+}
+.qs-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+.qs-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 16px;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: .2s;
+  text-decoration: none;
+  color: var(--text);
+  background: none; border-top: none; border-bottom: none; border-left: none;
+  font-family: inherit;
+}
+.qs-item:last-child { border-right: none; }
+.qs-item:hover { background: var(--off); }
+.qs-icon { font-size: 26px; margin-bottom: 8px; }
+.qs-label { font-size: 12px; font-weight: 600; color: var(--blue); line-height: 1.3; }
+
+/* ─── SECTIONS ───────────────────────────────────────────────── */
+.section { padding: 64px 40px; }
+.section-alt { background: #fff; }
+.section-blue { background: var(--navy); color: #fff; }
+.inner { max-width: 1200px; margin: auto; }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--blue2);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.section-blue .section-label { color: var(--amber); }
+.section-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.section-blue .section-title { color: #fff; }
+.section-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.65;
+}
+.section-blue .section-sub { color: rgba(255,255,255,.75); }
+.section-header { margin-bottom: 40px; }
+
+/* ─── CARDS ──────────────────────────────────────────────────── */
+.cards-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.cards-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.cards-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: .25s;
+}
+.card:hover {
+  box-shadow: var(--shadow2);
+  transform: translateY(-3px);
+  border-color: var(--blue2);
+}
+.card-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue2);
+  cursor: pointer;
+  text-decoration: none;
+  background: none; border: none; font-family: inherit;
+}
+.card-link:hover { color: var(--blue); gap: 8px; }
+
+/* service cards (colour top border) */
+.scard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: .25s;
+  border-top: 4px solid var(--blue);
+}
+.scard.green { border-top-color: var(--green); }
+.scard.amber { border-top-color: var(--amber); }
+.scard:hover { box-shadow: var(--shadow2); transform: translateY(-2px); }
+
+/* ─── TARIFF TABLES ──────────────────────────────────────────── */
+.tariff-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+  flex-wrap: wrap;
+}
+.tariff-tab {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: .2s;
+  font-family: inherit;
+}
+.tariff-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+.tariff-tab:hover { color: var(--blue2); }
+.tariff-panel { display: none; }
+.tariff-panel.active { display: block; }
+
+table.tariff {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+table.tariff thead tr { background: var(--navy); color: #fff; }
+table.tariff th {
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+table.tariff td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+table.tariff tbody tr:last-child td { border-bottom: none; }
+table.tariff tbody tr:nth-child(even) { background: var(--off); }
+table.tariff tbody tr:hover { background: #EBF3FF; }
+.tariff-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: #FFF8E1;
+  border-left: 4px solid var(--amber);
+  border-radius: 0 var(--r2) var(--r2) 0;
+  line-height: 1.6;
+}
+
+/* ─── BILL CALCULATOR ────────────────────────────────────────── */
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.calc-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+.calc-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-group { margin-bottom: 18px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 7px;
+}
+.form-input, .form-select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--off);
+  transition: .2s;
+  outline: none;
+}
+.form-input:focus, .form-select:focus {
+  border-color: var(--blue);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0,87,168,.12);
+}
+.calc-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--r2);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: .2s;
+  margin-top: 6px;
+}
+.calc-btn:hover { background: var(--navy); }
+
+/* Result box */
+.result-box {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: #fff;
+  border-radius: var(--r);
+  padding: 28px;
+  margin-top: 24px;
+  display: none;
+}
+.result-box.show { display: block; }
+.result-title { font-size: 13px; color: rgba(255,255,255,.75); margin-bottom: 6px; }
+.result-amount { font-size: 42px; font-weight: 800; color: var(--amber); }
+.result-period { font-size: 14px; color: rgba(255,255,255,.7); margin-top: 4px; }
+.result-rows { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.result-row {
+  display: flex; justify-content: space-between;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.result-row:last-child { border-bottom: none; }
+.result-row span:first-child { color: rgba(255,255,255,.75); }
+.result-row span:last-child { font-weight: 600; color: #fff; }
+
+/* ─── OUTAGE REPORTER ────────────────────────────────────────── */
+.outage-form { max-width: 640px; }
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: var(--r2);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.status-ok { background: #E6F7EE; color: var(--green); border: 1px solid #A8E6C0; }
+.status-warn { background: #FFF3E0; color: #E07B00; border: 1px solid #FFCC80; }
+.status-pulse {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: currentColor; animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+/* ─── FAQ ────────────────────────────────────────────────────── */
+.faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 800px; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.faq-q {
+  padding: 16px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+  transition: .2s;
+}
+.faq-q:hover { background: var(--off); }
+.faq-chevron { font-size: 18px; transition: .25s; color: var(--blue2); flex-shrink: 0; }
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a-inner { padding: 0 20px 16px; }
+
+/* ─── ABOUT / HISTORY TIMELINE ───────────────────────────────── */
+.timeline { position: relative; padding-left: 36px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding-bottom: 0;
+}
+.tl-dot {
+  position: absolute;
+  left: -30px;
+  top: 4px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--blue);
+}
+.tl-year {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.tl-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.tl-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ─── PARTNERS ───────────────────────────────────────────────── */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.partner-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r);
+  padding: 20px;
+  text-align: center;
+  transition: .2s;
+}
+.partner-card:hover { background: rgba(255,255,255,.18); }
+.partner-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.partner-role { font-size: 12px; color: rgba(255,255,255,.65); line-height: 1.4; }
+
+/* ─── STAT CARDS ─────────────────────────────────────────────── */
+.stat-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.stat-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r);
+  padding: 24px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.35; }
+
+/* ─── CONTACT ────────────────────────────────────────────────── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.contact-info-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--off);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+  transition: .2s;
+}
+.contact-info-card:hover { border-color: var(--blue2); background: #EBF3FF; }
+.contact-icon {
+  font-size: 26px;
+  width: 48px; height: 48px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.contact-val { font-size: 15px; font-weight: 600; color: var(--navy); }
+.contact-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* Map placeholder */
+.map-placeholder {
+  background: linear-gradient(135deg, #E8F0FE, #C9DDF8);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 600;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ─── NEWS CARDS ─────────────────────────────────────────────── */
+.news-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: .25s;
+}
+.news-card:hover { box-shadow: var(--shadow2); transform: translateY(-2px); }
+.news-img {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.news-img.elec { background: linear-gradient(135deg,#FFF3E0,#FFCC80); }
+.news-img.water { background: linear-gradient(135deg,#E3F2FD,#90CAF9); }
+.news-img.infra { background: linear-gradient(135deg,#E8F5E9,#A5D6A7); }
+.news-body { padding: 20px; }
+.news-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.tag-blue { background: #E3F2FD; color: var(--blue); }
+.tag-green { background: #E8F5E9; color: var(--green); }
+.tag-amber { background: #FFF3E0; color: var(--amber); }
+.news-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.3; }
+.news-excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.news-date { font-size: 11px; color: var(--muted); margin-top: 12px; }
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,.8);
+  padding: 48px 40px 24px;
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-logo { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 10px; }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,.6); margin-bottom: 14px; line-height: 1.6; }
+.footer-col-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.5); margin-bottom: 14px; }
+.footer-links { display: flex; flex-direction: column; gap: 8px; }
+.footer-link { font-size: 13px; color: rgba(255,255,255,.75); text-decoration: none; cursor: pointer; background: none; border: none; font-family: inherit; text-align: left; transition: .15s; }
+.footer-link:hover { color: var(--amber); }
+.footer-bottom {
+  max-width: 1200px; margin: auto;
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.4); }
+.emergency-strip {
+  background: var(--red);
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+/* ─── PAGE TOGGLE ────────────────────────────────────────────── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ─── TOAST ──────────────────────────────────────────────────── */
+.toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+.toast {
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: var(--r);
+  font-size: 14px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.3);
+  display: flex; align-items: center; gap: 10px;
+  animation: slideIn .3s ease;
+  max-width: 320px;
+}
+.toast.success { border-left: 4px solid var(--green); }
+.toast.error   { border-left: 4px solid var(--red); }
+.toast.info    { border-left: 4px solid var(--amber); }
+@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ─── BADGE ──────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.badge-blue { background: #E3F2FD; color: var(--blue); }
+.badge-green { background: #E8F5E9; color: var(--green); }
+.badge-amber { background: #FFF3E0; color: var(--amber); }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-stats { display: none; }
+  .hero h1 { font-size: 34px; }
+  .cards-3, .cards-4 { grid-template-columns: 1fr 1fr; }
+  .qs-inner { grid-template-columns: repeat(3,1fr); }
+  .stat-cards { grid-template-columns: repeat(2,1fr); }
+  .partners-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .topbar { display: none; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .section { padding: 40px 20px; }
+  .hero { padding: 48px 20px 40px; }
+  .cards-3, .cards-4, .cards-2 { grid-template-columns: 1fr; }
+  .qs-inner { grid-template-columns: repeat(2,1fr); }
+  .stat-cards { grid-template-columns: 1fr 1fr; }
+  .partners-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 26px; }
+  .hero h1 { font-size: 28px; }
+  .quick-services { padding: 0 16px; }
+  .nav-right .btn-portal { display: none; }
+}
+
+/* ─── REPORT FORM TABLE ──────────────────────────────────────── */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+.report-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.report-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.report-table tr:nth-child(even) td { background: var(--off); }
+.report-table tr:hover td { background: #EBF3FF; }
+
+/* Print */
+@media print {
+  nav, .topbar, .quick-services, footer, .toast-container, .hamburger { display: none !important; }
+  .page { display: block !important; }
+  .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>📍 53 Mamadi Maniyang Highway, Westfield, Banjul, The Gambia &nbsp;|&nbsp; Mon–Fri: 8:00 AM – 4:00 PM</div>
+  <div class="topbar-right">
+    <span>📞 +220 437 6090</span>
+    <span>✉ info@nawec.gm</span>
+    <span class="emergency-badge">⚡ Emergency: 1669 (24/7)</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home')" href="javascript:void(0)">
+      <div class="nav-logo-icon">💧</div>
+      <div class="nav-logo-text">
+        <div class="brand">NAWEC</div>
+        <div class="sub">The Gambia</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showPage('home',this)">Home</button>
+      <button class="nav-link" onclick="showPage('about',this)">About</button>
+      <button class="nav-link" onclick="showPage('services',this)">Services</button>
+      <button class="nav-link" onclick="showPage('tariffs',this)">Tariffs</button>
+      <button class="nav-link" onclick="showPage('calculator',this)">Bill Calculator</button>
+      <button class="nav-link" onclick="showPage('outage',this)">Outage / Report</button>
+      <button class="nav-link" onclick="showPage('news',this)">News</button>
+      <button class="nav-link" onclick="showPage('contact',this)">Contact</button>
+    </div>
+    <div class="nav-right">
+      <button class="btn-portal" onclick="showPage('calculator',document.querySelector('.nav-link.active'))">Bill Calculator</button>
+    </div>
+    <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="nav-link" onclick="showPage('home');toggleMobile()">Home</button>
+    <button class="nav-link" onclick="showPage('about');toggleMobile()">About</button>
+    <button class="nav-link" onclick="showPage('services');toggleMobile()">Services</button>
+    <button class="nav-link" onclick="showPage('tariffs');toggleMobile()">Tariffs</button>
+    <button class="nav-link" onclick="showPage('calculator');toggleMobile()">Bill Calculator</button>
+    <button class="nav-link" onclick="showPage('outage');toggleMobile()">Outage / Report</button>
+    <button class="nav-link" onclick="showPage('news');toggleMobile()">News</button>
+    <button class="nav-link" onclick="showPage('contact');toggleMobile()">Contact</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HOME PAGE ═══════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">National Water &amp; Electricity Company</div>
+        <h1>Powering <span>Progress</span> Across The Gambia</h1>
+        <p class="hero-sub">
+          Providing essential electricity, water, and sewerage services to communities
+          throughout The Gambia since 1996 — committed to reliability, affordability,
+          and a sustainable future for every citizen.
+        </p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('calculator')">⚡ Calculate My Bill</button>
+          <button class="btn-outline" onclick="showPage('outage')">🔴 Report Outage</button>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">355K+</div>
+          <div class="hero-stat-label">Electricity Customers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">93K+</div>
+          <div class="hero-stat-label">Water Customers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100+ MW</div>
+          <div class="hero-stat-label">Generation Capacity</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">719</div>
+          <div class="hero-stat-label">Communities Served</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK SERVICES -->
+  <div class="quick-services">
+    <div class="qs-inner">
+      <button class="qs-item" onclick="showPage('calculator')">
+        <div class="qs-icon">🧮</div>
+        <div class="qs-label">Bill Calculator</div>
+      </button>
+      <button class="qs-item" onclick="showPage('tariffs')">
+        <div class="qs-icon">📋</div>
+        <div class="qs-label">View Tariffs</div>
+      </button>
+      <button class="qs-item" onclick="showPage('outage')">
+        <div class="qs-icon">🔴</div>
+        <div class="qs-label">Report Outage</div>
+      </button>
+      <button class="qs-item" onclick="showPage('services')">
+        <div class="qs-icon">🔌</div>
+        <div class="qs-label">New Connection</div>
+      </button>
+      <button class="qs-item" onclick="showPage('contact')">
+        <div class="qs-icon">📞</div>
+        <div class="qs-label">Contact Us</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- SERVICES OVERVIEW -->
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Core Utilities</div>
+        <div class="section-title">Essential Services for Every Gambian</div>
+        <div class="section-sub">NAWEC delivers three critical utility services that power homes, businesses, and communities across the country.</div>
+      </div>
+      <div class="cards-3">
+        <div class="scard">
+          <span class="card-icon">⚡</span>
+          <div class="card-title">Electricity Supply</div>
+          <p class="card-text">Generation, transmission, and distribution of electricity through thermal plants, solar PV, and the OMVG regional interconnection. Prepaid and postpaid metering available.</p>
+          <button class="card-link" onclick="showPage('services')">Learn more →</button>
+        </div>
+        <div class="scard green">
+          <span class="card-icon">💧</span>
+          <div class="card-title">Water Supply</div>
+          <p class="card-text">Safe, clean drinking water through treatment plants and distribution networks across the Greater Banjul Area and provincial towns. New connections and meter services available.</p>
+          <button class="card-link" onclick="showPage('services')">Learn more →</button>
+        </div>
+        <div class="scard amber">
+          <span class="card-icon">🚰</span>
+          <div class="card-title">Sewerage Services</div>
+          <p class="card-text">Wastewater collection and treatment services ensuring public health protection and environmental compliance across served communities.</p>
+          <button class="card-link" onclick="showPage('services')">Learn more →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAND -->
+  <div class="section section-blue">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">NAWEC at a Glance</div>
+        <div class="section-title">Serving The Gambia</div>
+      </div>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">MW Installed Generation Capacity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">448K+</div>
+          <div class="stat-label">Total Customer Accounts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">150 MW</div>
+          <div class="stat-label">OMVG Import Capacity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1996</div>
+          <div class="stat-label">Year Established</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="section">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Quick Access</div>
+        <div class="section-title">What Can We Help You With?</div>
+      </div>
+      <div class="cards-4">
+        <div class="card" onclick="showPage('calculator')" style="cursor:pointer">
+          <span class="card-icon">🧮</span>
+          <div class="card-title">Estimate Your Bill</div>
+          <p class="card-text">Calculate your expected electricity or water bill based on your consumption and customer type.</p>
+        </div>
+        <div class="card" onclick="showPage('tariffs')" style="cursor:pointer">
+          <span class="card-icon">📋</span>
+          <div class="card-title">Current Tariffs</div>
+          <p class="card-text">View the latest PURA-approved electricity, water, and sewerage tariff schedules.</p>
+        </div>
+        <div class="card" onclick="showPage('outage')" style="cursor:pointer">
+          <span class="card-icon">🔴</span>
+          <div class="card-title">Report a Fault</div>
+          <p class="card-text">Report power outages, water supply issues, or infrastructure faults in your area.</p>
+        </div>
+        <div class="card" onclick="showPage('contact')" style="cursor:pointer">
+          <span class="card-icon">🏢</span>
+          <div class="card-title">Find a Branch</div>
+          <p class="card-text">Locate your nearest NAWEC service centre, pay a bill, or apply for a new connection.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATEST NEWS -->
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Latest Updates</div>
+        <div class="section-title">News &amp; Announcements</div>
+      </div>
+      <div class="cards-3">
+        <div class="news-card">
+          <div class="news-img elec">⚡</div>
+          <div class="news-body">
+            <span class="news-tag tag-blue">Electricity</span>
+            <div class="news-title">Universal Electricity Access — 719 Communities Inaugurated</div>
+            <p class="news-excerpt">President Barrow concludes nationwide inauguration programme advancing universal electricity access targets under NAWEC's 2021–2040 strategic roadmap.</p>
+            <div class="news-date">📅 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img water">💧</div>
+          <div class="news-body">
+            <span class="news-tag tag-green">Water</span>
+            <div class="news-title">Greater Banjul Water Supply Improvements (WASIB) Programme</div>
+            <p class="news-excerpt">NAWEC and AFD continue major investment in water supply infrastructure upgrades across the Greater Banjul Area to improve reliability and coverage.</p>
+            <div class="news-date">📅 2024</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img infra">🔌</div>
+          <div class="news-body">
+            <span class="news-tag tag-amber">Infrastructure</span>
+            <div class="news-title">OMVG 225kV Interconnection Operational at Soma &amp; Brikama</div>
+            <p class="news-excerpt">The landmark 50MW SENELEC power purchase agreement is now fully operational, significantly boosting electricity supply security across The Gambia.</p>
+            <div class="news-date">📅 2023</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px;text-align:center">
+        <button class="btn-outline" style="color:var(--blue);border-color:var(--blue)" onclick="showPage('news')">View All News</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY STRIP -->
+  <div class="emergency-strip">
+    ⚡ Emergency Fault Line: <strong>1669</strong> (Toll-Free, 24 hours / 7 days) &nbsp;|&nbsp; ☎ Office: +220 437 6090 &nbsp;|&nbsp; ✉ info@nawec.gm
+  </div>
+</div><!-- /page-home -->
+
+
+<!-- ═══════════════════ ABOUT PAGE ═══════════════════ -->
+<div class="page" id="page-about">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">Who We Are</div>
+      <h1 style="font-size:38px">About NAWEC</h1>
+      <p class="hero-sub" style="font-size:15px">The National Water and Electricity Company — powering progress since 1996.</p>
+    </div>
+  </div>
+
+  <!-- Mission/Vision/Values -->
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="cards-3">
+        <div class="card" style="border-top:4px solid var(--blue)">
+          <span class="card-icon">🎯</span>
+          <div class="card-title">Our Mission</div>
+          <p class="card-text">To provide safe, reliable, and affordable electricity, water, and sewerage services to all communities across The Gambia, contributing to socio-economic development and improved quality of life for all citizens.</p>
+        </div>
+        <div class="card" style="border-top:4px solid var(--amber)">
+          <span class="card-icon">🔭</span>
+          <div class="card-title">Our Vision</div>
+          <p class="card-text">To be a world-class utility company that delivers sustainable and innovative energy and water solutions, powering national development and universal access across The Gambia by 2040.</p>
+        </div>
+        <div class="card" style="border-top:4px solid var(--green)">
+          <span class="card-icon">🌟</span>
+          <div class="card-title">Our Values</div>
+          <p class="card-text">
+            <strong>Reliability</strong> — Dependable services 24/7<br>
+            <strong>Integrity</strong> — Transparency &amp; accountability<br>
+            <strong>Innovation</strong> — Embracing modern solutions<br>
+            <strong>Service</strong> — Customer-focused delivery<br>
+            <strong>Sustainability</strong> — Environmentally responsible
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corporate profile -->
+  <div class="section">
+    <div class="inner">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+        <div>
+          <div class="section-label">Corporate Profile</div>
+          <div class="section-title" style="margin-bottom:20px">About the Company</div>
+          <p style="color:var(--muted);line-height:1.8;margin-bottom:14px;font-size:15px">
+            The National Water and Electricity Company (NAWEC) was established in June 1996 under the
+            Companies Act of 1955 as a Private Limited Liability Company. NAWEC is mandated for the
+            provision of <strong>electricity, water, and sewerage services</strong> across The Gambia.
+          </p>
+          <p style="color:var(--muted);line-height:1.8;margin-bottom:14px;font-size:15px">
+            NAWEC succeeded the Gambia Utilities Corporation (GUC), established by an Act of Parliament
+            in 1972, and the Utilities Holding Corporation (UHC), established in 1992. The electricity,
+            water, and sewerage assets are owned by the Government of The Gambia but managed and
+            operated by NAWEC.
+          </p>
+          <p style="color:var(--muted);line-height:1.8;font-size:15px">
+            Under its strategic roadmap, NAWEC is committed to achieving <strong>universal electricity access</strong>
+            and ensuring reliable, affordable utility services for all citizens, supported by major investments
+            in infrastructure modernisation and renewable energy.
+          </p>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+              <span style="font-size:14px;color:var(--text)"><strong>Established:</strong> June 1996 under the Companies Act</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+              <span style="font-size:14px;color:var(--text)"><strong>Type:</strong> Private Limited Liability Company</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+              <span style="font-size:14px;color:var(--text)"><strong>HQ:</strong> 53 Mamadi Maniyang Highway, The Gambia</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+              <span style="font-size:14px;color:var(--text)"><strong>Regulator:</strong> Public Utilities Regulatory Authority (PURA)</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label" style="margin-bottom:20px">Company History</div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot"></div>
+              <div class="tl-year">1972</div>
+              <div class="tl-title">Gambia Utilities Corporation (GUC)</div>
+              <p class="tl-text">Established by an Act of Parliament to manage the country's electricity and water supply services.</p>
+            </div>
+            <div class="tl-item"><div class="tl-dot"></div>
+              <div class="tl-year">1992</div>
+              <div class="tl-title">Utilities Holding Corporation (UHC)</div>
+              <p class="tl-text">Created by Presidential Executive Order. UHC entered into a leasing contract with SOGEA/MSG to operate and manage utility assets.</p>
+            </div>
+            <div class="tl-item"><div class="tl-dot"></div>
+              <div class="tl-year">1996</div>
+              <div class="tl-title">NAWEC Established</div>
+              <p class="tl-text">The National Water and Electricity Company was incorporated, succeeding UHC.</p>
+            </div>
+            <div class="tl-item"><div class="tl-dot"></div>
+              <div class="tl-year">2021</div>
+              <div class="tl-title">Strategic Roadmap 2021–2040</div>
+              <p class="tl-text">Cabinet-approved roadmap targeting universal electricity access by 2025, with long-term planning through 2040. Financed by the World Bank.</p>
+            </div>
+            <div class="tl-item"><div class="tl-dot"></div>
+              <div class="tl-year">2022</div>
+              <div class="tl-title">SENELEC Power Purchase Agreement</div>
+              <p class="tl-text">Signed landmark PPA with Senegal's SENELEC for 50MW of imported electricity via the OMVG interconnection.</p>
+            </div>
+            <div class="tl-item"><div class="tl-dot"></div>
+              <div class="tl-year">2025</div>
+              <div class="tl-title">Universal Access Programme</div>
+              <p class="tl-text">Major electrification inaugurations across 719 communities advancing universal electricity access across The Gambia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Development Partners -->
+  <div class="section section-blue">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Development Partners</div>
+        <div class="section-title">Working Together for The Gambia</div>
+        <div class="section-sub">NAWEC works with international partners to finance and implement critical infrastructure projects, capacity building, and institutional reforms.</div>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-card"><div class="partner-name">🌍 World Bank</div><div class="partner-role">Strategic roadmaps, generation &amp; electrification projects</div></div>
+        <div class="partner-card"><div class="partner-name">🏦 African Development Bank</div><div class="partner-role">Infrastructure development and energy access</div></div>
+        <div class="partner-card"><div class="partner-name">🇫🇷 AFD (France)</div><div class="partner-role">Water supply improvements — Greater Banjul Area</div></div>
+        <div class="partner-card"><div class="partner-name">🇰🇼 Kuwaiti Fund</div><div class="partner-role">Utility infrastructure and expansion projects</div></div>
+        <div class="partner-card"><div class="partner-name">⚡ OMVG</div><div class="partner-role">Regional electricity interconnection and power trade</div></div>
+        <div class="partner-card"><div class="partner-name">🇸🇳 SENELEC</div><div class="partner-role">Cross-border 50MW power purchase agreement</div></div>
+        <div class="partner-card"><div class="partner-name">🇪🇺 European Union</div><div class="partner-role">Energy sector reform and renewable energy</div></div>
+        <div class="partner-card"><div class="partner-name">🌐 ECOWAS / WAPP</div><div class="partner-role">West African Power Pool regional integration</div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-about -->
+
+
+<!-- ═══════════════════ SERVICES PAGE ═══════════════════ -->
+<div class="page" id="page-services">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">Utility Services</div>
+      <h1 style="font-size:38px">Our Services</h1>
+      <p class="hero-sub" style="font-size:15px">Electricity, water, and sewerage services for homes, businesses, and industry across The Gambia.</p>
+    </div>
+  </div>
+
+  <!-- Electricity -->
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Utility Service</div>
+        <div class="section-title">⚡ Electricity Supply</div>
+        <div class="section-sub">NAWEC generates, transmits, and distributes electricity across The Gambia through multiple sources including thermal, solar, and regional imports.</div>
+      </div>
+      <div class="cards-3">
+        <div class="card"><span class="card-icon">🏭</span><div class="card-title">Generation</div><p class="card-text">Thermal generation at Kotu, Brikama, and provincial stations. Growing solar PV capacity and renewable integration under the national roadmap.</p></div>
+        <div class="card"><span class="card-icon">🔗</span><div class="card-title">OMVG Interconnection</div><p class="card-text">225kV regional transmission line connecting The Gambia to the OMVG pool, with 50MW PPA from SENELEC now fully operational.</p></div>
+        <div class="card"><span class="card-icon">📟</span><div class="card-title">Prepaid Meters (Cash Power)</div><p class="card-text">Prepaid metering allows customers to purchase electricity in advance and manage their consumption and spending effectively.</p></div>
+        <div class="card"><span class="card-icon">📄</span><div class="card-title">Postpaid / Credit Meters</div><p class="card-text">Monthly billing for domestic, commercial, and industrial customers with tiered pricing based on consumption bands.</p></div>
+        <div class="card"><span class="card-icon">🌄</span><div class="card-title">Rural Electrification</div><p class="card-text">Universal access programme connecting 719 communities across The Gambia, including last-mile extension and solar solutions.</p></div>
+        <div class="card"><span class="card-icon">🔌</span><div class="card-title">New Connection</div><p class="card-text">Apply for a new domestic or commercial electricity connection at your nearest NAWEC branch. Fees vary based on distance from the nearest pole.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Water -->
+  <div class="section">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Utility Service</div>
+        <div class="section-title">💧 Water Supply</div>
+        <div class="section-sub">Safe, clean drinking water distributed across the Greater Banjul Area and provincial towns through treatment plants and distribution networks.</div>
+      </div>
+      <div class="cards-3">
+        <div class="card"><span class="card-icon">🏗️</span><div class="card-title">Water Treatment</div><p class="card-text">Water treatment plants and borehole systems supplying treated, safe drinking water to connected customers across urban and peri-urban areas.</p></div>
+        <div class="card"><span class="card-icon">🚿</span><div class="card-title">New Water Connection</div><p class="card-text">Apply for a new domestic or commercial water connection at your nearest branch. Fees depend on pipe distance from the mains supply to your property.</p></div>
+        <div class="card"><span class="card-icon">🔬</span><div class="card-title">Water Quality</div><p class="card-text">Ongoing water quality monitoring and testing to ensure compliance with international drinking water standards and public health requirements.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sewerage -->
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="section-header">
+        <div class="section-label">Utility Service</div>
+        <div class="section-title">🚰 Sewerage Services</div>
+        <div class="section-sub">Wastewater collection and treatment ensuring public health protection and environmental compliance across served communities.</div>
+      </div>
+      <div class="cards-3">
+        <div class="card"><span class="card-icon">🏙️</span><div class="card-title">Collection Networks</div><p class="card-text">Sewerage collection networks serving residential and commercial properties across connected areas, with ongoing infrastructure rehabilitation.</p></div>
+        <div class="card"><span class="card-icon">♻️</span><div class="card-title">Wastewater Treatment</div><p class="card-text">Treatment facilities ensuring proper wastewater management for public health and environmental protection standards.</p></div>
+        <div class="card"><span class="card-icon">🔧</span><div class="card-title">New Sewerage Connection</div><p class="card-text">Apply for a sewerage connection at your nearest NAWEC branch for residential, commercial, or industrial properties.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section section-blue" style="text-align:center">
+    <div class="inner">
+      <div class="section-title" style="margin-bottom:12px">Apply for a New Connection</div>
+      <div class="section-sub" style="margin:auto;text-align:center;margin-bottom:28px">Visit your nearest NAWEC branch or call us to get a quotation for your new electricity, water, or sewerage connection.</div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="showPage('contact')">📍 Find Nearest Branch</button>
+        <button class="btn-outline" onclick="showPage('tariffs')">📋 View Connection Fees</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-services -->
+
+
+<!-- ═══════════════════ TARIFFS PAGE ═══════════════════ -->
+<div class="page" id="page-tariffs">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">PURA Approved Pricing</div>
+      <h1 style="font-size:38px">Service Tariffs</h1>
+      <p class="hero-sub" style="font-size:15px">Current electricity, water, and sewerage pricing schedules approved by the Public Utilities Regulatory Authority (PURA) of The Gambia.</p>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <div class="inner">
+
+      <!-- Info boxes -->
+      <div class="cards-3" style="margin-bottom:36px">
+        <div style="background:#E3F2FD;border:1px solid #90CAF9;border-radius:var(--r);padding:20px">
+          <div style="font-size:20px;margin-bottom:8px">📊</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px">PURA Regulated</div>
+          <div style="font-size:13px;color:var(--muted)">All tariffs reviewed and approved by the Public Utilities Regulatory Authority (PURA), the independent regulator of The Gambia.</div>
+        </div>
+        <div style="background:#E8F5E9;border:1px solid #A5D6A7;border-radius:var(--r);padding:20px">
+          <div style="font-size:20px;margin-bottom:8px">📈</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px">Tiered Usage Bands</div>
+          <div style="font-size:13px;color:var(--muted)">Domestic customers benefit from tiered pricing — lower rates for lower consumption, helping lower-income households afford basic services.</div>
+        </div>
+        <div style="background:#FFF3E0;border:1px solid #FFCC80;border-radius:var(--r);padding:20px">
+          <div style="font-size:20px;margin-bottom:8px">🏠</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px">Lifeline Rate</div>
+          <div style="font-size:13px;color:var(--muted)">Low-consumption domestic customers benefit from a subsidised lifeline rate in the first usage band for both electricity and water.</div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tariff-tabs">
+        <button class="tariff-tab active" onclick="switchTariff('elec-credit',this)">⚡ Electricity — Credit Meters</button>
+        <button class="tariff-tab" onclick="switchTariff('elec-prepaid',this)">⚡ Electricity — Prepaid</button>
+        <button class="tariff-tab" onclick="switchTariff('water',this)">💧 Water</button>
+        <button class="tariff-tab" onclick="switchTariff('sewage',this)">🚰 Sewerage</button>
+      </div>
+
+      <!-- ELECTRICITY CREDIT -->
+      <div class="tariff-panel active" id="tariff-elec-credit">
+        <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px">Electricity — Credit (Postpaid) Meter Tariffs</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Credit meter tariffs are structured by customer class and consumption bands (kWh per month). All rates in Gambian Dalasi (GMD) per kWh.</p>
+        <table class="tariff">
+          <thead><tr><th>Customer Class</th><th>Consumption Band (kWh/month)</th><th>2014 Rate (GMD)</th><th>2023 Rate (GMD)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Domestic</strong></td><td>0 – 300 kWh</td><td>10.14</td><td><strong>13.85</strong></td></tr>
+            <tr><td></td><td>301 – 600 kWh</td><td>10.49</td><td><strong>14.06</strong></td></tr>
+            <tr><td></td><td>601 – 1,000 kWh</td><td>10.77</td><td><strong>14.43</strong></td></tr>
+            <tr><td></td><td>Above 1,000 kWh</td><td>11.54</td><td><strong>15.46</strong></td></tr>
+            <tr><td><strong>Commercial</strong></td><td>All consumption</td><td>10.90</td><td><strong>14.90</strong></td></tr>
+            <tr><td><strong>Hotel / Industries</strong></td><td>All consumption</td><td>11.65</td><td><strong>15.90</strong></td></tr>
+            <tr><td><strong>Agriculture</strong></td><td>All consumption</td><td>10.14</td><td><strong>13.89</strong></td></tr>
+            <tr><td><strong>Area Councils</strong></td><td>All consumption</td><td>10.90</td><td><strong>16.20</strong></td></tr>
+            <tr><td><strong>Central Government</strong></td><td>All consumption</td><td>10.90</td><td><strong>16.20</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="tariff-note">⚠️ Tariff rates effective from 10 April 2023, as approved by PURA. Rates are subject to periodic review. Contact NAWEC or call 1669 for the latest rates.</div>
+      </div>
+
+      <!-- ELECTRICITY PREPAID -->
+      <div class="tariff-panel" id="tariff-elec-prepaid">
+        <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px">Electricity — Prepaid Meter Tariffs (Cash Power)</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Prepaid customers are charged a flat rate per customer class. Buy electricity tokens in advance at NAWEC branches and authorised vendors. All rates in GMD per kWh.</p>
+        <table class="tariff">
+          <thead><tr><th>Customer Class</th><th>Meter Type</th><th>2014 Rate (GMD)</th><th>2023 Rate (GMD)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Domestic</strong></td><td>Prepaid (Flat)</td><td>10.14</td><td><strong>13.85</strong></td></tr>
+            <tr><td><strong>Commercial</strong></td><td>Prepaid (Flat)</td><td>10.90</td><td><strong>14.90</strong></td></tr>
+            <tr><td><strong>Hotel / Industries</strong></td><td>Prepaid (Flat)</td><td>11.65</td><td><strong>15.90</strong></td></tr>
+            <tr><td><strong>Agriculture</strong></td><td>Prepaid (Flat)</td><td>10.14</td><td><strong>13.89</strong></td></tr>
+            <tr><td><strong>Area Councils</strong></td><td>Prepaid (Flat)</td><td>10.90</td><td><strong>16.20</strong></td></tr>
+            <tr><td><strong>Central Government</strong></td><td>Prepaid (Flat)</td><td>10.90</td><td><strong>16.20</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="tariff-note">⚠️ Prepaid meters help customers manage their electricity usage and budget more effectively. Tokens can be purchased at NAWEC offices and authorised vendors across The Gambia.</div>
+      </div>
+
+      <!-- WATER -->
+      <div class="tariff-panel" id="tariff-water">
+        <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px">Water Tariffs (Per Cubic Metre)</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Water tariffs are based on cubic metres (cum) consumed per month. Domestic customers benefit from tiered pricing. All rates in GMD per cubic metre.</p>
+        <table class="tariff">
+          <thead><tr><th>Customer Class</th><th>Consumption Band</th><th>2014 Rate (GMD)</th><th>2023 Rate (GMD)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Domestic</strong></td><td>0 – 10 cum</td><td>5.50</td><td><strong>6.48</strong></td></tr>
+            <tr><td></td><td>11 – 25 cum</td><td>12.00</td><td><strong>14.15</strong></td></tr>
+            <tr><td></td><td>26 – 40 cum</td><td>16.00</td><td><strong>18.86</strong></td></tr>
+            <tr><td></td><td>Above 40 cum</td><td>20.00</td><td><strong>23.58</strong></td></tr>
+            <tr><td><strong>Commercial</strong></td><td>All consumption</td><td>24.20</td><td><strong>28.50</strong></td></tr>
+            <tr><td><strong>Hotel / Industries</strong></td><td>All consumption</td><td>34.00</td><td><strong>40.09</strong></td></tr>
+            <tr><td><strong>Agriculture</strong></td><td>All consumption</td><td>12.00</td><td><strong>14.15</strong></td></tr>
+            <tr><td><strong>Area Councils</strong></td><td>All consumption</td><td>16.79</td><td><strong>19.79</strong></td></tr>
+            <tr><td><strong>Central Government</strong></td><td>All consumption</td><td>16.79</td><td><strong>19.79</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="tariff-note">⚠️ Water tariff rates effective April 2023. The 0–10 cum domestic band represents the subsidised lifeline rate for low-consumption households.</div>
+      </div>
+
+      <!-- SEWAGE -->
+      <div class="tariff-panel" id="tariff-sewage">
+        <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px">Sewerage Tariffs (Per Cubic Metre of Water Consumed)</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Sewerage charges are based on cubic metres of water consumed by connected customers. All rates in GMD per cubic metre.</p>
+        <table class="tariff">
+          <thead><tr><th>Customer Class</th><th>Consumption Band</th><th>2023 Rate (GMD)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Domestic &amp; Local Authorities</strong></td><td>Flat rate (all consumption)</td><td><strong>5.00</strong></td></tr>
+            <tr><td><strong>All Other Users</strong></td><td>Flat rate (all consumption)</td><td><strong>15.00</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="tariff-note">⚠️ Sewerage charges apply only to customers with a sewerage connection. The rate is applied per cubic metre of water consumed as metered by your water meter.</div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /page-tariffs -->
+
+
+<!-- ═══════════════════ BILL CALCULATOR PAGE ═══════════════════ -->
+<div class="page" id="page-calculator">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">Estimate Your Costs</div>
+      <h1 style="font-size:38px">Bill Calculator</h1>
+      <p class="hero-sub" style="font-size:15px">Calculate your estimated monthly electricity or water bill based on your consumption and customer type.</p>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="calc-grid">
+
+        <!-- ELECTRICITY CALCULATOR -->
+        <div>
+          <div class="calc-panel">
+            <div class="calc-title">⚡ Electricity Bill Estimator</div>
+            <div class="form-group">
+              <label class="form-label">Customer Type</label>
+              <select class="form-select" id="elecCustomer" onchange="calcElec()">
+                <option value="domestic">Domestic</option>
+                <option value="commercial">Commercial</option>
+                <option value="hotel">Hotel / Industry</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="council">Area Council</option>
+                <option value="government">Central Government</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Meter Type</label>
+              <select class="form-select" id="meterType" onchange="calcElec()">
+                <option value="prepaid">Prepaid (Cash Power)</option>
+                <option value="postpaid">Postpaid (Credit Meter)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Monthly Consumption (kWh)</label>
+              <input class="form-input" type="number" id="elecUnits" value="200" min="0" max="5000" oninput="calcElec()" placeholder="e.g. 200">
+            </div>
+            <button class="calc-btn" onclick="calcElec()">Calculate Electricity Bill</button>
+
+            <div class="result-box" id="elecResult">
+              <div class="result-title">Estimated Monthly Bill</div>
+              <div class="result-amount" id="elecAmount">GMD 0</div>
+              <div class="result-period" id="elecPeriod">Based on 0 kWh consumption</div>
+              <div class="result-rows" id="elecBreakdown"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WATER CALCULATOR -->
+        <div>
+          <div class="calc-panel">
+            <div class="calc-title">💧 Water Bill Estimator</div>
+            <div class="form-group">
+              <label class="form-label">Customer Type</label>
+              <select class="form-select" id="waterCustomer" onchange="calcWater()">
+                <option value="domestic">Domestic</option>
+                <option value="commercial">Commercial</option>
+                <option value="hotel">Hotel / Industry</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="council">Area Council / Government</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Monthly Consumption (cubic metres)</label>
+              <input class="form-input" type="number" id="waterUnits" value="15" min="0" max="500" oninput="calcWater()" placeholder="e.g. 15">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sewerage Connected?</label>
+              <select class="form-select" id="sewerageConn" onchange="calcWater()">
+                <option value="no">No</option>
+                <option value="domestic">Yes — Domestic</option>
+                <option value="other">Yes — Commercial / Other</option>
+              </select>
+            </div>
+            <button class="calc-btn" onclick="calcWater()">Calculate Water Bill</button>
+
+            <div class="result-box" id="waterResult">
+              <div class="result-title">Estimated Monthly Bill</div>
+              <div class="result-amount" id="waterAmount">GMD 0</div>
+              <div class="result-period" id="waterPeriod">Based on 0 cum consumption</div>
+              <div class="result-rows" id="waterBreakdown"></div>
+            </div>
+          </div>
+
+          <!-- Tip -->
+          <div style="margin-top:20px;background:#E8F5E9;border:1px solid #A5D6A7;border-radius:var(--r);padding:18px">
+            <div style="font-size:14px;font-weight:700;color:var(--green);margin-bottom:6px">💡 Saving Tips</div>
+            <ul style="font-size:13px;color:var(--muted);line-height:1.8;padding-left:18px">
+              <li>Keep domestic electricity under 300 kWh/month for the lowest tariff band</li>
+              <li>Keep water usage under 10 cum/month for the subsidised lifeline rate</li>
+              <li>Prepaid meters help you track and control spending in real time</li>
+              <li>Fix dripping taps immediately — a slow drip wastes hundreds of litres</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tariff-note" style="margin-top:28px">
+        ⚠️ <strong>Disclaimer:</strong> These figures are estimates based on the 2023 PURA-approved tariff schedule and are for guidance only. Actual bills may vary based on meter readings, service charges, and other applicable fees. Contact NAWEC or call 1669 for the most accurate billing information.
+      </div>
+    </div>
+  </div>
+</div><!-- /page-calculator -->
+
+
+<!-- ═══════════════════ OUTAGE / REPORT PAGE ═══════════════════ -->
+<div class="page" id="page-outage">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">Fault Reporting</div>
+      <h1 style="font-size:38px">Report a Fault or Outage</h1>
+      <p class="hero-sub" style="font-size:15px">Report electricity outages, water supply issues, or infrastructure faults. Our team responds 24/7 to emergency faults.</p>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <div class="inner">
+
+      <!-- Emergency -->
+      <div style="background:#FFF3F3;border:2px solid var(--red);border-radius:var(--r);padding:20px 24px;margin-bottom:32px;display:flex;align-items:center;gap:16px">
+        <div style="font-size:36px">🚨</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--red);margin-bottom:4px">For Emergency Faults</div>
+          <div style="font-size:14px;color:var(--text)">Call our 24/7 emergency line: <strong style="font-size:20px;color:var(--red)">1669</strong> (Toll-Free) — For dangerous situations including fallen power lines, major outages, or burst water mains.</div>
+        </div>
+      </div>
+
+      <!-- Current status -->
+      <div class="status-indicator status-ok" style="margin-bottom:28px">
+        <div class="status-pulse"></div>
+        All systems operational — No major outages currently reported
+      </div>
+
+      <!-- Report form -->
+      <div class="calc-grid">
+        <div>
+          <div class="calc-panel">
+            <div class="calc-title">📋 Submit a Fault Report</div>
+            <div class="form-group">
+              <label class="form-label">Fault Type</label>
+              <select class="form-select" id="faultType">
+                <option value="">— Select fault type —</option>
+                <option>Power Outage — Complete</option>
+                <option>Power Outage — Partial (some phases)</option>
+                <option>Low Voltage / Fluctuation</option>
+                <option>Street Light Fault</option>
+                <option>Fallen Power Line (EMERGENCY)</option>
+                <option>Transformer Fault</option>
+                <option>Water Supply Interrupted</option>
+                <option>Low Water Pressure</option>
+                <option>Burst Water Main</option>
+                <option>Meter Fault / Not Reading</option>
+                <option>Sewerage Blockage / Overflow</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input class="form-input" type="text" id="faultName" placeholder="Full name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input class="form-input" type="tel" id="faultPhone" placeholder="+220 …">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Area / Location</label>
+              <select class="form-select" id="faultArea">
+                <option value="">— Select area —</option>
+                <option>Banjul</option><option>Kanifing</option><option>Bakau</option>
+                <option>Serekunda</option><option>Brikama</option><option>Brusubi</option>
+                <option>Sukuta</option><option>Gunjur</option><option>Soma</option>
+                <option>Bansang</option><option>Farafenni</option><option>Janjanbureh</option>
+                <option>Basse</option><option>Kerewan</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Street / Compound (optional)</label>
+              <input class="form-input" type="text" id="faultStreet" placeholder="Street name or compound description">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Account / Meter Number (if known)</label>
+              <input class="form-input" type="text" id="faultMeter" placeholder="e.g. 12345678">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea class="form-input" id="faultDesc" rows="3" placeholder="Describe the issue, when it started, and any other details that may help our team…" style="resize:vertical"></textarea>
+            </div>
+            <button class="calc-btn" onclick="submitReport()">Submit Fault Report</button>
+          </div>
+        </div>
+
+        <!-- Submitted reports log -->
+        <div>
+          <div class="calc-panel">
+            <div class="calc-title">📊 Recent Reports (This Session)</div>
+            <div id="reportsLog">
+              <div style="text-align:center;padding:32px;color:var(--muted);font-size:14px">
+                No reports submitted yet.<br>Use the form to report a fault.
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:20px">
+            <div class="calc-panel">
+              <div class="calc-title" style="font-size:15px">🕐 Response Times</div>
+              <table class="report-table">
+                <thead><tr><th>Fault Type</th><th>Target Response</th></tr></thead>
+                <tbody>
+                  <tr><td>Emergency (fallen lines, etc.)</td><td><strong style="color:var(--red)">Immediate — Call 1669</strong></td></tr>
+                  <tr><td>Major outage (&gt;50 customers)</td><td>Within 2 hours</td></tr>
+                  <tr><td>Localised outage</td><td>Within 4 hours</td></tr>
+                  <tr><td>Burst water main</td><td>Within 4 hours</td></tr>
+                  <tr><td>Meter fault</td><td>Within 3 working days</td></tr>
+                  <tr><td>Low pressure / supply issue</td><td>Within 24 hours</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /page-outage -->
+
+
+<!-- ═══════════════════ NEWS PAGE ═══════════════════ -->
+<div class="page" id="page-news">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">Updates &amp; Announcements</div>
+      <h1 style="font-size:38px">News &amp; Events</h1>
+      <p class="hero-sub" style="font-size:15px">The latest announcements, press releases, and updates from NAWEC.</p>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="cards-3">
+        <div class="news-card">
+          <div class="news-img infra">🏗️</div>
+          <div class="news-body">
+            <span class="news-tag tag-blue">Press Release</span>
+            <div class="news-title">Universal Electricity Access — 719 Communities Connected Nationwide</div>
+            <p class="news-excerpt">President Barrow concludes landmark inauguration programme as NAWEC reaches a major milestone in its universal access roadmap. Communities in all regions of The Gambia now have electricity connections.</p>
+            <div class="news-date">📅 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img elec">⚡</div>
+          <div class="news-body">
+            <span class="news-tag tag-blue">Electricity</span>
+            <div class="news-title">OMVG 225kV Line and SENELEC 50MW PPA Fully Operational</div>
+            <p class="news-excerpt">The regional OMVG interconnection and SENELEC power purchase agreement are now fully operational at Soma and Brikama substations, significantly boosting electricity supply reliability across The Gambia.</p>
+            <div class="news-date">📅 2023</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img water">💧</div>
+          <div class="news-body">
+            <span class="news-tag tag-green">Water</span>
+            <div class="news-title">WASIB Programme: Water Supply Improvements Across Greater Banjul Area</div>
+            <p class="news-excerpt">The NAWEC–AFD Water Supply Improvement in Banjul (WASIB) programme continues major infrastructure upgrades to improve water supply reliability, coverage, and quality for households in the Greater Banjul Area.</p>
+            <div class="news-date">📅 2024</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img elec">📊</div>
+          <div class="news-body">
+            <span class="news-tag tag-amber">Tariffs</span>
+            <div class="news-title">NAWEC Announces PURA-Approved Tariff Revision — Effective April 2023</div>
+            <p class="news-excerpt">Following a comprehensive review by PURA and consultation with stakeholders, new electricity and water tariff rates took effect from 10 April 2023. The revision reflects increased global fuel and material costs.</p>
+            <div class="news-date">📅 April 2023</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img infra">🌞</div>
+          <div class="news-body">
+            <span class="news-tag tag-green">Renewable Energy</span>
+            <div class="news-title">NAWEC Advances Solar PV Integration Under 2021–2040 Strategic Roadmap</div>
+            <p class="news-excerpt">NAWEC is progressing on solar photovoltaic integration as part of its World Bank–funded strategic roadmap targeting increased renewable energy capacity and reduced dependence on thermal generation.</p>
+            <div class="news-date">📅 2024</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img water">🔬</div>
+          <div class="news-body">
+            <span class="news-tag tag-green">Water Quality</span>
+            <div class="news-title">NAWEC Commits to Enhanced Water Quality Monitoring Programme</div>
+            <p class="news-excerpt">NAWEC has strengthened its water quality monitoring and testing protocols across all treatment plants and distribution networks to ensure compliance with international drinking water standards.</p>
+            <div class="news-date">📅 2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-news -->
+
+
+<!-- ═══════════════════ CONTACT PAGE ═══════════════════ -->
+<div class="page" id="page-contact">
+  <div class="hero" style="min-height:220px;padding:48px 40px">
+    <div class="inner">
+      <div class="hero-eyebrow">Get in Touch</div>
+      <h1 style="font-size:38px">Contact NAWEC</h1>
+      <p class="hero-sub" style="font-size:15px">Find a branch, call us, or send an enquiry. Our team is here Mon–Fri 8am–4pm. Emergency faults: call 1669 any time.</p>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <div class="inner">
+      <div class="contact-grid">
+        <div>
+          <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:20px">Contact Information</h3>
+
+          <div class="contact-info-card">
+            <div class="contact-icon">🚨</div>
+            <div>
+              <div class="contact-label">Emergency (24/7)</div>
+              <div class="contact-val" style="color:var(--red);font-size:24px">1669</div>
+              <div class="contact-sub">Toll-free · Power &amp; water emergencies · Any time</div>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Main Office</div>
+              <div class="contact-val">+220 437 6090</div>
+              <div class="contact-sub">Monday – Friday, 8:00 AM – 4:00 PM</div>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val">info@nawec.gm</div>
+              <div class="contact-sub">General enquiries and customer support</div>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Head Office</div>
+              <div class="contact-val">53 Mamadi Maniyang Highway</div>
+              <div class="contact-sub">Westfield, Banjul, The Gambia</div>
+            </div>
+          </div>
+
+          <div class="map-placeholder">
+            <div style="font-size:48px">📍</div>
+            <div>NAWEC Head Office — Westfield, Banjul</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px">53 Mamadi Maniyang Highway</div>
+          </div>
+        </div>
+
+        <!-- Enquiry Form -->
+        <div>
+          <div class="calc-panel">
+            <div class="calc-title">📬 Send an Enquiry</div>
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input class="form-input" type="text" id="cName" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input class="form-input" type="tel" id="cPhone" placeholder="+220 …">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email (optional)</label>
+              <input class="form-input" type="email" id="cEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select class="form-select" id="cSubject">
+                <option>Billing Enquiry</option>
+                <option>New Connection</option>
+                <option>Meter Issue</option>
+                <option>Outage / Fault</option>
+                <option>Tariff Information</option>
+                <option>Complaint</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Account / Meter Number (if applicable)</label>
+              <input class="form-input" type="text" id="cMeter" placeholder="Optional">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea class="form-input" id="cMessage" rows="4" placeholder="Describe your enquiry in detail…" style="resize:vertical"></textarea>
+            </div>
+            <button class="calc-btn" onclick="submitEnquiry()">Send Enquiry</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branches -->
+      <div style="margin-top:48px">
+        <h3 style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:20px">NAWEC Service Branches</h3>
+        <div class="cards-3">
+          <div class="card">
+            <span class="card-icon">🏢</span>
+            <div class="card-title">Banjul — Head Office</div>
+            <p class="card-text">53 Mamadi Maniyang Highway, Westfield<br>📞 +220 437 6090<br>⏰ Mon–Fri: 8am–4pm</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🏢</span>
+            <div class="card-title">Kanifing — Serekunda</div>
+            <p class="card-text">Kanifing Area, Serekunda<br>📞 +220 439 XXXX<br>⏰ Mon–Fri: 8am–4pm</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🏢</span>
+            <div class="card-title">Brikama — West Coast</div>
+            <p class="card-text">Brikama, West Coast Region<br>📞 +220 XXXX XXXX<br>⏰ Mon–Fri: 8am–4pm</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🏢</span>
+            <div class="card-title">Farafenni — North Bank</div>
+            <p class="card-text">Farafenni, North Bank Region<br>⏰ Mon–Fri: 8am–4pm</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🏢</span>
+            <div class="card-title">Bansang — Central River</div>
+            <p class="card-text">Bansang, Central River Region<br>⏰ Mon–Fri: 8am–4pm</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🏢</span>
+            <div class="card-title">Basse — Upper River</div>
+            <p class="card-text">Basse, Upper River Region<br>⏰ Mon–Fri: 8am–4pm</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-contact -->
+
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">💧 NAWEC</div>
+      <p class="footer-tagline">National Water &amp; Electricity Company Ltd<br>Committed to powering progress and delivering essential utility services to The Gambia since 1996.</p>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <a href="#" style="color:rgba(255,255,255,.6);font-size:18px;text-decoration:none" title="Facebook">📘</a>
+        <a href="#" style="color:rgba(255,255,255,.6);font-size:18px;text-decoration:none" title="Twitter/X">🐦</a>
+        <a href="#" style="color:rgba(255,255,255,.6);font-size:18px;text-decoration:none" title="LinkedIn">💼</a>
+        <a href="#" style="color:rgba(255,255,255,.6);font-size:18px;text-decoration:none" title="YouTube">▶️</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="showPage('about')">About NAWEC</button>
+        <button class="footer-link" onclick="showPage('about')">Board of Directors</button>
+        <button class="footer-link" onclick="showPage('about')">Management Team</button>
+        <button class="footer-link" onclick="showPage('news')">News &amp; Events</button>
+        <button class="footer-link" onclick="showPage('news')">Press Releases</button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="showPage('services')">Electricity Supply</button>
+        <button class="footer-link" onclick="showPage('services')">Water Supply</button>
+        <button class="footer-link" onclick="showPage('services')">Sewerage</button>
+        <button class="footer-link" onclick="showPage('tariffs')">Tariff Schedule</button>
+        <button class="footer-link" onclick="showPage('calculator')">Bill Calculator</button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-links">
+        <span class="footer-link" style="cursor:default">📍 53 Mamadi Maniyang Hwy</span>
+        <span class="footer-link" style="cursor:default">📞 +220 437 6090</span>
+        <span class="footer-link" style="cursor:default">✉️ info@nawec.gm</span>
+        <span class="footer-link" style="cursor:default;color:rgba(255,100,100,.9)">🚨 Emergency: 1669</span>
+        <span class="footer-link" style="cursor:default">⏰ Mon–Fri: 8am–4pm</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 NAWEC — National Water &amp; Electricity Company Ltd, The Gambia. All rights reserved.</span>
+    <span class="footer-copy">Regulated by PURA · Government of The Gambia</span>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<script>
+// ── Page routing ────────────────────────────────────────────────
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobile() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// ── Tariff tabs ─────────────────────────────────────────────────
+function switchTariff(id, el) {
+  document.querySelectorAll('.tariff-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tariff-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tariff-' + id).classList.add('active');
+}
+
+// ── FAQ accordion ────────────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+// ── Toast ────────────────────────────────────────────────────────
+function toast(msg, type = 'info') {
+  const icons = { success: '✅', error: '❌', info: '💡' };
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.innerHTML = `<span>${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
+  document.getElementById('toastContainer').appendChild(el);
+  setTimeout(() => {
+    el.style.animation = 'none';
+    el.style.opacity = '0';
+    el.style.transition = 'opacity .4s';
+    setTimeout(() => el.remove(), 400);
+  }, 4000);
+}
+
+// ── ELECTRICITY CALCULATOR ───────────────────────────────────────
+const ELEC_TARIFFS_PREPAID = {
+  domestic: 13.85,
+  commercial: 14.90,
+  hotel: 15.90,
+  agriculture: 13.89,
+  council: 16.20,
+  government: 16.20,
+};
+const ELEC_TARIFFS_POSTPAID_DOMESTIC = [
+  { max: 300,  rate: 13.85 },
+  { max: 600,  rate: 14.06 },
+  { max: 1000, rate: 14.43 },
+  { max: Infinity, rate: 15.46 },
+];
+const ELEC_TARIFFS_POSTPAID_OTHER = {
+  commercial: 14.90,
+  hotel: 15.90,
+  agriculture: 13.89,
+  council: 16.20,
+  government: 16.20,
+};
+
+function calcElec() {
+  const customer = document.getElementById('elecCustomer').value;
+  const meter    = document.getElementById('meterType').value;
+  const units    = parseFloat(document.getElementById('elecUnits').value) || 0;
+
+  let total = 0;
+  let breakdown = [];
+
+  if (meter === 'prepaid') {
+    const rate = ELEC_TARIFFS_PREPAID[customer] || 13.85;
+    total = units * rate;
+    breakdown.push({ label: `${units} kWh × GMD ${rate.toFixed(2)}`, val: total });
+  } else {
+    // Postpaid
+    if (customer === 'domestic') {
+      let remaining = units;
+      let prev = 0;
+      ELEC_TARIFFS_POSTPAID_DOMESTIC.forEach(band => {
+        if (remaining <= 0) return;
+        const bandLimit = Math.min(band.max, units) - prev;
+        if (bandLimit <= 0) return;
+        const inBand = Math.min(remaining, bandLimit);
+        const cost = inBand * band.rate;
+        total += cost;
+        breakdown.push({ label: `${inBand.toFixed(0)} kWh × GMD ${band.rate}`, val: cost });
+        remaining -= inBand;
+        prev = Math.min(band.max, units);
+      });
+    } else {
+      const rate = ELEC_TARIFFS_POSTPAID_OTHER[customer] || 14.90;
+      total = units * rate;
+      breakdown.push({ label: `${units} kWh × GMD ${rate.toFixed(2)}`, val: total });
+    }
+  }
+
+  const result = document.getElementById('elecResult');
+  result.classList.add('show');
+  document.getElementById('elecAmount').textContent = 'GMD ' + total.toLocaleString('en-GM', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  document.getElementById('elecPeriod').textContent = `Based on ${units} kWh consumption · ${meter === 'prepaid' ? 'Prepaid' : 'Postpaid'} · ${customer.charAt(0).toUpperCase() + customer.slice(1)}`;
+
+  const bEl = document.getElementById('elecBreakdown');
+  bEl.innerHTML = breakdown.map(r =>
+    `<div class="result-row"><span>${r.label}</span><span>GMD ${r.val.toLocaleString('en-GM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>`
+  ).join('') + `<div class="result-row" style="border-top:1px solid rgba(255,255,255,.2);padding-top:12px;margin-top:4px"><span style="font-weight:700;color:#fff">Total Estimated Bill</span><span style="font-weight:800;color:var(--amber);font-size:16px">GMD ${total.toLocaleString('en-GM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>`;
+}
+
+// ── WATER CALCULATOR ─────────────────────────────────────────────
+const WATER_TARIFFS_DOMESTIC = [
+  { max: 10,  rate: 6.48  },
+  { max: 25,  rate: 14.15 },
+  { max: 40,  rate: 18.86 },
+  { max: Infinity, rate: 23.58 },
+];
+const WATER_TARIFFS_OTHER = {
+  commercial: 28.50,
+  hotel: 40.09,
+  agriculture: 14.15,
+  council: 19.79,
+};
+const SEWERAGE_RATE = { domestic: 5.00, other: 15.00 };
+
+function calcWater() {
+  const customer = document.getElementById('waterCustomer').value;
+  const units    = parseFloat(document.getElementById('waterUnits').value) || 0;
+  const sewer    = document.getElementById('sewerageConn').value;
+
+  let waterTotal = 0;
+  let breakdown  = [];
+
+  if (customer === 'domestic') {
+    let remaining = units;
+    let prev = 0;
+    WATER_TARIFFS_DOMESTIC.forEach(band => {
+      if (remaining <= 0) return;
+      const bandLimit = Math.min(band.max, units) - prev;
+      if (bandLimit <= 0) return;
+      const inBand = Math.min(remaining, bandLimit);
+      const cost   = inBand * band.rate;
+      waterTotal  += cost;
+      breakdown.push({ label: `${inBand.toFixed(1)} cum × GMD ${band.rate}`, val: cost });
+      remaining  -= inBand;
+      prev = Math.min(band.max, units);
+    });
+  } else {
+    const rate = WATER_TARIFFS_OTHER[customer] || 28.50;
+    waterTotal = units * rate;
+    breakdown.push({ label: `${units} cum × GMD ${rate.toFixed(2)}`, val: waterTotal });
+  }
+
+  // Sewerage
+  let sewerTotal = 0;
+  if (sewer !== 'no') {
+    const sRate = sewer === 'domestic' ? SEWERAGE_RATE.domestic : SEWERAGE_RATE.other;
+    sewerTotal  = units * sRate;
+    breakdown.push({ label: `Sewerage: ${units} cum × GMD ${sRate.toFixed(2)}`, val: sewerTotal });
+  }
+
+  const total = waterTotal + sewerTotal;
+
+  const result = document.getElementById('waterResult');
+  result.classList.add('show');
+  document.getElementById('waterAmount').textContent = 'GMD ' + total.toLocaleString('en-GM', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  document.getElementById('waterPeriod').textContent = `Based on ${units} cum consumption · ${customer.charAt(0).toUpperCase() + customer.slice(1)}`;
+
+  const bEl = document.getElementById('waterBreakdown');
+  bEl.innerHTML = breakdown.map(r =>
+    `<div class="result-row"><span>${r.label}</span><span>GMD ${r.val.toLocaleString('en-GM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>`
+  ).join('') + `<div class="result-row" style="border-top:1px solid rgba(255,255,255,.2);padding-top:12px;margin-top:4px"><span style="font-weight:700;color:#fff">Total Estimated Bill</span><span style="font-weight:800;color:var(--amber);font-size:16px">GMD ${total.toLocaleString('en-GM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>`;
+}
+
+// ── OUTAGE REPORT ────────────────────────────────────────────────
+const reports = [];
+function submitReport() {
+  const type   = document.getElementById('faultType').value;
+  const name   = document.getElementById('faultName').value.trim();
+  const phone  = document.getElementById('faultPhone').value.trim();
+  const area   = document.getElementById('faultArea').value;
+  const desc   = document.getElementById('faultDesc').value.trim();
+
+  if (!type || !name || !phone || !area) {
+    toast('Please fill in all required fields.', 'error'); return;
+  }
+
+  const ref = 'NWC-' + Date.now().toString().slice(-6);
+  const now = new Date().toLocaleString('en-GM');
+  reports.unshift({ ref, type, name, area, phone, desc, time: now, status: 'Received' });
+
+  document.getElementById('faultType').value  = '';
+  document.getElementById('faultName').value  = '';
+  document.getElementById('faultPhone').value = '';
+  document.getElementById('faultArea').value  = '';
+  document.getElementById('faultStreet').value = '';
+  document.getElementById('faultMeter').value = '';
+  document.getElementById('faultDesc').value  = '';
+
+  renderReports();
+  toast(`Fault report submitted! Reference: ${ref}`, 'success');
+}
+
+function renderReports() {
+  const el = document.getElementById('reportsLog');
+  if (!reports.length) { el.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:14px">No reports yet.</div>'; return; }
+  el.innerHTML = reports.map(r => `
+    <div style="border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px;background:var(--off)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">${r.type}</span>
+        <span style="font-size:10px;font-weight:700;background:#E3F2FD;color:var(--blue);padding:2px 8px;border-radius:12px">${r.ref}</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px">📍 ${r.area} · ${r.name} · ${r.phone}</div>
+      <div style="font-size:11px;color:var(--muted)">${r.time} · <strong style="color:var(--green)">✓ ${r.status}</strong></div>
+    </div>`).join('');
+}
+
+// ── CONTACT FORM ─────────────────────────────────────────────────
+function submitEnquiry() {
+  const name    = document.getElementById('cName').value.trim();
+  const phone   = document.getElementById('cPhone').value.trim();
+  const message = document.getElementById('cMessage').value.trim();
+
+  if (!name || !phone || !message) {
+    toast('Please fill in your name, phone, and message.', 'error'); return;
+  }
+
+  document.getElementById('cName').value    = '';
+  document.getElementById('cPhone').value   = '';
+  document.getElementById('cEmail').value   = '';
+  document.getElementById('cMeter').value   = '';
+  document.getElementById('cMessage').value = '';
+
+  toast('Thank you! Your enquiry has been received. We will contact you shortly.', 'success');
+}
+
+// ── Auto-calculate on load ────────────────────────────────────────
+calcElec();
+calcWater();
+</script>
+</body>
+</html>
+HTMLEOF
